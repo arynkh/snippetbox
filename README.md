@@ -1,4 +1,4 @@
-# GO-Snippetbox
+# Snippetbox
 
 A simple Go web application to manage and display snippets of text. 
 
