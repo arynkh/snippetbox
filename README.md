@@ -10,15 +10,17 @@ A simple Go web application to manage and display snippets of text.
 ## Installation
 
 1. Clone the repo:
-    git clone https://github.com/arynkh/snippetbox.git
+```bash
+   git clone https://github.com/arynkh/snippetbox.git
     cd snippetbox
-
+```
 2. Run the application: 
-    go run ./cmd/web
-
+```bash
+   go run ./cmd/web
+```
 3. Open browser at http://localhost:4000
 
 
-    ## Author
+## Author
 
-    Aryn Head
+Aryn Head
