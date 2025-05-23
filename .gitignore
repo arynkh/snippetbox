@@ -1,0 +1,18 @@
+#Binaries
+
+.exe
+*.exe~
+*.out
+*.so
+.dll
+
+#Output folders
+bin/
+obj/
+
+#Go workspace files
+go.work
+
+#IDE/editor settings
+.vscode/
+.idea/
