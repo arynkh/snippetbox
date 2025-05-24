@@ -16,3 +16,5 @@ go.work
 #IDE/editor settings
 .vscode/
 .idea/
+#Logs
+tmp/
