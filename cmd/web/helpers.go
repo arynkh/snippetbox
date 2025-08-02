@@ -2,10 +2,13 @@ package main
 
 import (
 	"bytes"
+	"errors"
 	"fmt"
 	"net/http"
 	"runtime/debug"
 	"time"
+
+	"github.com/go-playground/form/v4"
 )
 
 // helps write a log entry at Error level (including the reques method and URI as attributes), then sends a generic 500 Internal Server Error response to the client/user
@@ -50,5 +53,25 @@ func (app *application) render(w http.ResponseWriter, r *http.Request, status in
 func (app *application) newTemplateData(r *http.Request) templateData {
 	return templateData{
 		CurrentYear: time.Now().Year(),
+		Flash:       app.sessionManager.PopString(r.Context(), "flash"), //retrieve the flash message from the session and remove it
 	}
+}
+
+func (app *application) decodePostForm(r *http.Request, dst any) error {
+	err := r.ParseForm()
+	if err != nil {
+		return err
+	}
+	//call Decode on the formDecoder field of the app struct, passing in the destination as the first parameter
+	err = app.formDecoder.Decode(dst, r.PostForm)
+	if err != nil {
+		var invalidDecoderErr *form.InvalidDecoderError
+
+		if errors.As(err, &invalidDecoderErr) {
+			panic(err)
+		}
+		return err
+	}
+
+	return nil
 }
