@@ -90,7 +90,7 @@ func TestUserSignup(t *testing.T) {
 
 	//make a GET /user/signup request & extract the CSRF token from the response body
 	_, _, body := ts.get(t, "/user/signup")
-	csrfToken := extractCSRFToken(t, body)
+	validCSRFToken := extractCSRFToken(t, body)
 
 	const (
 		validName     = "Bob"
@@ -113,7 +113,7 @@ func TestUserSignup(t *testing.T) {
 			userName:     validName,
 			userEmail:    validEmail,
 			userPassword: validPassword,
-			csrfToken:    csrfToken,
+			csrfToken:    validCSRFToken,
 			wantCode:     http.StatusSeeOther,
 		},
 		{
@@ -129,7 +129,7 @@ func TestUserSignup(t *testing.T) {
 			userName:     "",
 			userEmail:    validEmail,
 			userPassword: validPassword,
-			csrfToken:    csrfToken,
+			csrfToken:    validCSRFToken,
 			wantCode:     http.StatusUnprocessableEntity,
 			wantFormTag:  formTag,
 		},
@@ -138,7 +138,7 @@ func TestUserSignup(t *testing.T) {
 			userName:     validName,
 			userEmail:    "",
 			userPassword: validPassword,
-			csrfToken:    csrfToken,
+			csrfToken:    validCSRFToken,
 			wantCode:     http.StatusUnprocessableEntity,
 			wantFormTag:  formTag,
 		},
@@ -147,7 +147,7 @@ func TestUserSignup(t *testing.T) {
 			userName:     validName,
 			userEmail:    validEmail,
 			userPassword: "",
-			csrfToken:    csrfToken,
+			csrfToken:    validCSRFToken,
 			wantCode:     http.StatusUnprocessableEntity,
 			wantFormTag:  formTag,
 		},
@@ -156,7 +156,7 @@ func TestUserSignup(t *testing.T) {
 			userName:     validName,
 			userEmail:    "bob@example.",
 			userPassword: validPassword,
-			csrfToken:    csrfToken,
+			csrfToken:    validCSRFToken,
 			wantCode:     http.StatusUnprocessableEntity,
 			wantFormTag:  formTag,
 		},
@@ -165,7 +165,7 @@ func TestUserSignup(t *testing.T) {
 			userName:     validName,
 			userEmail:    validEmail,
 			userPassword: "pa$$",
-			csrfToken:    csrfToken,
+			csrfToken:    validCSRFToken,
 			wantCode:     http.StatusUnprocessableEntity,
 			wantFormTag:  formTag,
 		},
@@ -174,7 +174,7 @@ func TestUserSignup(t *testing.T) {
 			userName:     validName,
 			userEmail:    "dupe@example.com",
 			userPassword: validPassword,
-			csrfToken:    csrfToken,
+			csrfToken:    validCSRFToken,
 			wantCode:     http.StatusUnprocessableEntity,
 			wantFormTag:  formTag,
 		},

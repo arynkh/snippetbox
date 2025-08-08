@@ -25,6 +25,7 @@ func (app *application) routes() http.Handler {
 	mux.Handle("POST /user/signup", dynamic.ThenFunc(app.userSignupPost))
 	mux.Handle("GET /user/login", dynamic.ThenFunc(app.userLogin))
 	mux.Handle("POST /user/login", dynamic.ThenFunc(app.userLoginPost))
+	mux.Handle("GET /about", dynamic.ThenFunc(app.about))
 
 	//protected (authenticated-only) routes
 	protected := dynamic.Append(app.requireAuthentication)
