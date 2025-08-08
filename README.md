@@ -2,10 +2,16 @@
 
 A simple Go web application to manage and display snippets of text. 
 
+Developed by following the <a href="https://lets-go.alexedwards.net">Let's Go book by Alex Edwards.</a>
+
 ## Features
-- Create, view, and delete snippets
+- Create, view, and update snippets
 - Built using Go's net/http package
 - Minimal HTML templating
+- Middleware
+- User authentication/authorization
+- Logging
+- Dynamic HTML using Go templates
 
 ## Installation
 
@@ -20,7 +26,3 @@ A simple Go web application to manage and display snippets of text.
 ```
 3. Open browser at http://localhost:4000
 
-
-## Author
-
-Aryn Head
