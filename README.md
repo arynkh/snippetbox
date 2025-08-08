@@ -1,6 +1,6 @@
 # Snippetbox
 
-A simple Go web application to manage and display snippets of text. 
+A simple Go web application to manage and display snippets of text. This project is all based on the standard library. 
 
 Developed by following the <a href="https://lets-go.alexedwards.net">Let's Go book by Alex Edwards.</a>
 
