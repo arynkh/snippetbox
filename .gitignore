@@ -9,6 +9,7 @@
 #Output folders
 bin/
 obj/
+tmp/
 
 #Go workspace files
 go.work

@@ -9,6 +9,7 @@ import (
 	"time"
 
 	"github.com/go-playground/form/v4"
+	"github.com/justinas/nosurf"
 )
 
 // helps write a log entry at Error level (including the reques method and URI as attributes), then sends a generic 500 Internal Server Error response to the client/user
@@ -52,8 +53,10 @@ func (app *application) render(w http.ResponseWriter, r *http.Request, status in
 
 func (app *application) newTemplateData(r *http.Request) templateData {
 	return templateData{
-		CurrentYear: time.Now().Year(),
-		Flash:       app.sessionManager.PopString(r.Context(), "flash"), //retrieve the flash message from the session and remove it
+		CurrentYear:     time.Now().Year(),
+		Flash:           app.sessionManager.PopString(r.Context(), "flash"), //retrieve the flash message from the session and remove it
+		IsAuthenticated: app.isAuthenticated(r),                             //check if the user is authenticated
+		CSRFToken:       nosurf.Token(r),                                    //get the CSRF token from the request
 	}
 }
 
@@ -74,4 +77,12 @@ func (app *application) decodePostForm(r *http.Request, dst any) error {
 	}
 
 	return nil
+}
+
+func (app *application) isAuthenticated(r *http.Request) bool {
+	isAuthenticated, ok := r.Context().Value(isAuthenticatedContextKey).(bool)
+	if !ok {
+		return false
+	}
+	return isAuthenticated
 }
