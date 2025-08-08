@@ -99,6 +99,8 @@ func (ts *testServer) get(t *testing.T, urlPath string) (int, http.Header, strin
 	}
 	body = bytes.TrimSpace(body)
 
+	t.Log(rs.StatusCode)
+
 	return rs.StatusCode, rs.Header, string(body)
 }
 

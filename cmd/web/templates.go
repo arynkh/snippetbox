@@ -19,6 +19,7 @@ type templateData struct {
 	Flash           string
 	IsAuthenticated bool
 	CSRFToken       string
+	User            models.User
 }
 
 // returns nicely formatted string representation of a time.Time object
