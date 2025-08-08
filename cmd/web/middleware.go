@@ -54,6 +54,7 @@ func (app *application) requireAuthentication(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		//if user is not authenticated, redirect to the login page
 		if !app.isAuthenticated(r) {
+			app.sessionManager.Put(r.Context(), "redirectPathAfterLogin", r.URL.Path)
 			http.Redirect(w, r, "/user/login", http.StatusSeeOther)
 			return
 		}

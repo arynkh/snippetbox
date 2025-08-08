@@ -33,6 +33,8 @@ func (app *application) routes() http.Handler {
 	mux.Handle("GET /snippet/create", protected.ThenFunc(app.snippetCreate))
 	mux.Handle("POST /snippet/create", protected.ThenFunc(app.snippetCreatePost))
 	mux.Handle("GET /account/view", protected.ThenFunc(app.accountView))
+	mux.Handle("GET /account/password/update", protected.ThenFunc(app.accountPasswordUpdate))
+	mux.Handle("POST /account/password/update", protected.ThenFunc(app.accountPasswordUpdatePost))
 	mux.Handle("POST /user/logout", protected.ThenFunc(app.userLogoutPost))
 
 	//middleware chain used for every request our app receives
